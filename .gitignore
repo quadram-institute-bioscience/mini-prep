@@ -1,3 +1,6 @@
 .nextflow.log*
 .ipynb_checkpoints/
 results/
+.nextflow/
+./dog/
+dog-mt/ref/
