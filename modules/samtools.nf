@@ -1,6 +1,6 @@
 process SAMTOOLS_STATS {
     tag "$sample_id"
-    conda "bioconda::samtools=1.15"
+    conda "bioconda::samtools=1.21"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
         'biocontainers/samtools:1.21--h50ea8bc_0' }"
@@ -9,10 +9,10 @@ process SAMTOOLS_STATS {
     tuple val(sample_id), path(bam)
     
     output:
-    path "${sample_id}_samtools_stats.txt", emit: stats
+    path "${sample_id}.txt", emit: stats
     
     script:
     """
-    samtools stats ${bam} > ${sample_id}_samtools_stats.txt
+    samtools stats ${bam} > ${sample_id}.txt
     """
 }
