@@ -16,7 +16,7 @@ process BBMAP {
     tuple val(sample_id), path("${sample_id}_mapped.bam"), emit: bam
     
     script:
-    def avail_mem = task.memory ? (task.memory.toGiga() - 1).intdiv(task.cpus) : 4
+    def avail_mem = task.memory ? (task.memory.toGiga() - 1) : 4
     // Ensure minimum 1GB per CPU
     avail_mem = Math.max(1, avail_mem)
     """
