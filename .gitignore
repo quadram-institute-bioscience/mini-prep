@@ -2,5 +2,5 @@
 .ipynb_checkpoints/
 results/
 .nextflow/
-./dog/
+dog/
 dog-mt/ref/
