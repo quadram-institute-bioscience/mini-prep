@@ -16,8 +16,12 @@ process BBMAP {
     tuple val(sample_id), path("${sample_id}_mapped.bam"), emit: bam
     
     script:
+    def avail_mem = task.memory ? (task.memory.toGiga() - 1).intdiv(task.cpus) : 4
+    // Ensure minimum 1GB per CPU
+    avail_mem = Math.max(1, avail_mem)
     """
-    bbmap.sh in1=${reads[0]} in2=${reads[1]} \
+    bbmap.sh -Xmx${avail_mem}g threads=${task.cpus} \
+             in1=${reads[0]} in2=${reads[1]} \
              out=${sample_id}_mapped.bam \
              path=${contaminants_db} \
              outu1=${sample_id}_clean_R1.fastq.gz outu2=${sample_id}_clean_R2.fastq.gz
