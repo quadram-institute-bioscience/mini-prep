@@ -3,6 +3,7 @@ include { BBMAP } from '../modules/bbmap'
 include { SAMTOOLS_STATS } from '../modules/samtools'
 include { MULTIQC } from '../modules/multiqc'
 include { KRAKEN } from '../modules/kraken'
+include { HOSTILE_CLEAN } from '../modules/hostile.nf'
 
 workflow MAIN_WORKFLOW {
     // Define input channels
